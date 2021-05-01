@@ -6,6 +6,7 @@
   include("includes/function.php");
 
   $file_path = getBaseUrl().'api.php';
+  echo $file_path;
 ?>
 <div class="row">
       <div class="col-sm-12 col-xs-12">

@@ -222,7 +222,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Narcos" style="color: inherit;">
-                                Narcos                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 1 K</p> 
+                                Narcos                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 1 K</p> 
                             </a>
                         </div>
                     </td>
@@ -234,7 +235,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Game Of Thrones" style="color: inherit;">
-                                Game Of Thrones                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 650</p> 
+                                Game Of Thrones                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 650</p> 
                             </a>
                         </div>
                     </td>
@@ -246,7 +248,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Gone Girl" style="color: inherit;">
-                                Gone Girl                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 635</p> 
+                                Gone Girl                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 635</p> 
                             </a>
                         </div>
                     </td>
@@ -258,7 +261,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Mirzapur" style="color: inherit;">
-                                Mirzapur                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 599</p> 
+                                Mirzapur                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 599</p> 
                             </a>
                         </div>
                     </td>
@@ -270,7 +274,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Arrow" style="color: inherit;">
-                                Arrow                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 588</p> 
+                                Arrow                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 588</p> 
                             </a>
                         </div>
                     </td>
@@ -290,7 +295,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Baaghi 3" style="color: inherit;">
-                                Baaghi 3                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 1.8 K</p> 
+                                Baaghi 3                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 1.8 K</p> 
                             </a>
                         </div>
                     </td>
@@ -302,7 +308,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Avengers Endgame" style="color: inherit;">
-                                Avengers Endgame                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 1.4 K</p> 
+                                Avengers Endgame                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 1.4 K</p> 
                             </a>
                         </div>
                     </td>
@@ -314,7 +321,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Subtitle/Quality" style="color: inherit;">
-                                Subtitle/Quality                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 723</p> 
+                                Subtitle/Quality                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 723</p> 
                             </a>
                         </div>
                     </td>
@@ -326,7 +334,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Maari" style="color: inherit;">
-                                Maari                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 521</p> 
+                                Maari                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 521</p> 
                             </a>
                         </div>
                     </td>
@@ -338,7 +347,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="2.0" style="color: inherit;">
-                                2.0                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 268</p> 
+                                2.0                   
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 268</p> 
                             </a>
                         </div>
                     </td>
@@ -350,7 +360,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Yeh Jawaani Hai Deewani" style="color: inherit;">
-                                Yeh Jawaani Hai Deewani                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 238</p> 
+                                Yeh Jawaani Hai Deewani                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 238</p> 
                             </a>
                         </div>
                     </td>
@@ -362,7 +373,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Bhoot Returns" style="color: inherit;">
-                                Bhoot Returns                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 207</p> 
+                                Bhoot Returns                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 207</p> 
                             </a>
                         </div>
                     </td>
@@ -374,7 +386,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Sultan (2016 film)" style="color: inherit;">
-                                Sultan (2016 film)                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 192</p> 
+                                Sultan (2016 film)                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 192</p> 
                             </a>
                         </div>
                     </td>
@@ -386,7 +399,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="The Fate of the Furious 8" style="color: inherit;">
-                                The Fate of the Furious 8                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 146</p> 
+                                The Fate of the Furious 8                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 146</p> 
                             </a>
                         </div>
                     </td>
@@ -398,7 +412,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Gone Girl" style="color: inherit;">
-                                Gone Girl                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 145</p> 
+                                Gone Girl                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 145</p> 
                             </a>
                         </div>
                     </td>
@@ -419,7 +434,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Doordarshan" style="color: inherit;">
-                                Doordarshan                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 853</p> 
+                                Doordarshan                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 853</p> 
                             </a>
                         </div>
                     </td>
@@ -431,7 +447,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="DEMO M3U8 - Sony Ten 1 HD" style="color: inherit;">
-                                DEMO M3U8 - Sony Ten 1 HD                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 701</p> 
+                                DEMO M3U8 - Sony Ten 1 HD                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 701</p> 
                             </a>
                         </div>
                     </td>
@@ -443,7 +460,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Booba Cartoon for Kids" style="color: inherit;">
-                                Booba Cartoon for Kids                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 698</p> 
+                                Booba Cartoon for Kids                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 698</p> 
                             </a>
                         </div>
                     </td>
@@ -455,7 +473,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="9XM" style="color: inherit;">
-                                9XM                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 597</p> 
+                                9XM                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 597</p> 
                             </a>
                         </div>
                     </td>
@@ -467,7 +486,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="Star Sports" style="color: inherit;">
-                                Star Sports                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 586</p> 
+                                Star Sports                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 586</p> 
                             </a>
                         </div>
                     </td>
@@ -479,7 +499,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="MTV" style="color: inherit;">
-                                MTV                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 548</p> 
+                                MTV                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 548</p> 
                             </a>
                         </div>
                     </td>
@@ -491,7 +512,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="ChuChu TV" style="color: inherit;">
-                                ChuChu TV                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 538</p> 
+                                ChuChu TV                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 538</p> 
                             </a>
                         </div>
                     </td>
@@ -503,7 +525,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="NDTV India" style="color: inherit;">
-                                NDTV India                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 537</p> 
+                                NDTV India                   
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 537</p> 
                             </a>
                         </div>
                     </td>
@@ -515,7 +538,8 @@ if ($smtp_warning) {
                         </div>
                         <div>
                             <a href="javascript:void(0)" title="WB Kids" style="color: inherit;">
-                                WB Kids                    <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 450</p> 
+                                WB Kids                    
+                                <p style="font-weight: 500"><span class="label label-default" style="font-size: 10px;padding: 2px 8px;">Views: 450</p> 
                             </a>
                         </div>
                     </td>
