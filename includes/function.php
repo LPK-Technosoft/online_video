@@ -341,14 +341,14 @@ function calculate_time_span($post_time, $flag = false) {
 
 function checkSignSalt($data_info) {
 
-    $key = "260898";
+    $key = "zfm13";
 
     $data_json = $data_info;
-    print_r($data_json);
-    $data_arr = json_decode(urldecode(base64_decode($data_json)), true);
-    echo $data_arr;
-    if ($data_arr['package_name'] == PACKAGE_NAME) {
+    //echo PACKAGE_NAME;
 
+    $data_arr = json_decode(urldecode(base64_decode($data_json)), true);
+   // print_r($data_arr);
+    if ($data_arr['package_name'] == PACKAGE_NAME) {
         if ($data_arr['sign'] == '' && $data_arr['salt'] == '') {
 
             $set['ONLINE_RADIO'][] = array("success" => -1, "msg" => "Invalid sign salt.");

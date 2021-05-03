@@ -1,24 +1,23 @@
-<?php 
-  
-  $page_title="Api Urls";
+<?php
+$page_title = "Api Urls";
 
-  include("includes/header.php");
-  include("includes/function.php");
+include("includes/header.php");
+include("includes/function.php");
 
-  $file_path = getBaseUrl().'api.php';
-  echo $file_path;
+$file_path = getBaseUrl() . 'api.php';
+echo $file_path;
 ?>
 <div class="row">
-      <div class="col-sm-12 col-xs-12">
-     	 	<div class="card">
-		        <div class="card-header">
-		          <?=$page_title?>
-		        </div>
-       			    <div class="card-body no-padding">
-         		
-         			 <pre>
+    <div class="col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <?= $page_title ?>
+            </div>
+            <div class="card-body no-padding">
+
+                <pre>
                 <code class="html">
-                <br><b>API URL</b>&nbsp; <?php echo $file_path;?>    
+                <br><b>API URL</b>&nbsp; <?php echo $file_path; ?>    
 
                 <br><b>Home</b>(Method: get_home_radio)
                 <br><b>Latest Radio</b>(Method: get_latest_radio)
@@ -44,14 +43,20 @@
                 <br><b>Favorite Post</b>(Method: favorite_post) (Parameter: post_id, user_id, type[song/radio])
                 <br><b>Get Favorite Post</b>(Method: get_favorite_post) (Parameter: user_id, type[song/radio])
                 <br><b>App Details</b>(Method: get_app_details)
+                <br><b>Video list by Category</b>(Method: get_video_by_cat_id) (Parameter: cat_id)
+                <br><b>Single Video</b>(Method: get_single_video) (Parameter: video_id)
+				        <br><b>Most View Video List</b>(Method: get_most_video_view)
+                <br><b>Search Video</b>(Method: get_search_video) (Parameter: search_text)
+                <br><b>Latest Video</b>(Method: get_latest_video)
+                
                 </code> 
-             </pre>
-       		
-       				</div>
-          	</div>
+                </pre>
+
+            </div>
         </div>
+    </div>
 </div>
-    <br/>
-    <div class="clearfix"></div>
-        
-<?php include("includes/footer.php");?>       
+<br/>
+<div class="clearfix"></div>
+
+<?php include("includes/footer.php"); ?>       
