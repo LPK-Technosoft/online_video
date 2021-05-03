@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
                                     </select>
                                 </div>
                             </div>
-                            <div id="video_url_display" class="form-group">
+                            <div id="video_url_display" class="form-group" style="display:none;">
                                 <label class="col-md-3 control-label">Video URL :-</label>
                                 <div class="col-md-6">
                                     <input type="text" name="video_url" id="video_url" value="" class="form-control">

@@ -341,12 +341,12 @@ function calculate_time_span($post_time, $flag = false) {
 
 function checkSignSalt($data_info) {
 
-    $key = "viaviweb";
+    $key = "260898";
 
     $data_json = $data_info;
-
+    print_r($data_json);
     $data_arr = json_decode(urldecode(base64_decode($data_json)), true);
-
+    echo $data_arr;
     if ($data_arr['package_name'] == PACKAGE_NAME) {
 
         if ($data_arr['sign'] == '' && $data_arr['salt'] == '') {

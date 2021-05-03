@@ -21,26 +21,34 @@ if (isset($_GET['video_id'])) {
 }
 
 if (isset($_POST['submit'])) {
-
-    $data = array(
-        'cat_id' => cleanInput($_POST['cat_id']),
-        'video_title' => cleanInput($_POST['video_title']),
-        'video_type' => cleanInput($_POST['video_type']),
-        'video_upload' => cleanInput($_POST['video_file_name']),
-        'video_url' => trim($_POST['video_url']),
-        'video_description' => addslashes($_POST['video_description']),
-        'video_thumbnail' => $video_image
-    );
-
-
-
+    if ($_POST['video_type'] == "youtube") {
+        $data = array(
+            'cat_id' => cleanInput($_POST['cat_id']),
+            'video_title' => cleanInput($_POST['video_title']),
+            'video_type' => cleanInput($_POST['video_type']),
+            'video_upload' => '',
+            'video_url' => trim($_POST['video_url']),
+            'video_description' => addslashes($_POST['video_description']),
+            'video_thumbnail' => ''
+        );
+    } else {
+        $data = array(
+            'cat_id' => cleanInput($_POST['cat_id']),
+            'video_title' => cleanInput($_POST['video_title']),
+            'video_type' => cleanInput($_POST['video_type']),
+            'video_upload' => cleanInput($_POST['video_file_name']),
+            'video_url' => '',
+            'video_description' => addslashes($_POST['video_description']),
+            'video_thumbnail' => $video_image
+        );
+    }
     if ($_FILES['video_thumbnail']['name'] != "") {
         $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
 
         $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
 
         //Main Image
-        $tpath1 = 'images/video/' . $radio_image;
+        $tpath1 = 'images/video/' . $video_image;
 
         if ($ext != 'png') {
             $pic1 = compress_image($_FILES["video_thumbnail"]["tmp_name"], $tpath1, 80);
@@ -52,7 +60,7 @@ if (isset($_POST['submit'])) {
         $data = array_merge($data, array("video_thumbnail" => $video_image));
     }
 
-    $qry = Update('tbl_video', $data, "WHERE id = '" . $_POST['radio_id'] . "'");
+    $qry = Update('tbl_video', $data, "WHERE id = '" . $_GET['video_id'] . "'");
 
     $_SESSION['class'] = "success";
     $_SESSION['msg'] = "11";
@@ -137,7 +145,16 @@ if (isset($_POST['submit'])) {
                             <?php
                             if ($row['video_type'] == 'youtube') {
                                 ?>
-                                <div class="form-group">
+                                <div class="form-group" id="video_url_display" style="display:none;">
+                                    <label class="col-md-3 control-label">Video URL :-</label>
+                                    <div class="col-md-6">
+                                        <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>
+                                    </div>
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <div class="form-group" id="video_url_display" style="display:none;">
                                     <label class="col-md-3 control-label">Video URL :-</label>
                                     <div class="col-md-6">
                                         <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>
@@ -163,7 +180,8 @@ if (isset($_POST['submit'])) {
                                         <div class="msg"></div>
                                         <input type="button" id="btn" class="btn-success" value="Upload" />
                                     </div>
-                                </div><br><div id="thumbnail" class="form-group" style="display:none;">
+                                </div><br>
+                                <div id="thumbnail" class="form-group" style="display:none;">
                                     <label class="col-md-3 control-label">Thumbnail Image:-
                                         <p class="control-label-help">(Recommended resolution: 300*400,400*500 or Rectangle Image)</p>
                                     </label>
@@ -171,6 +189,35 @@ if (isset($_POST['submit'])) {
                                         <div class="fileupload_block">
                                             <input type="file" name="video_thumbnail" value="" id="fileupload">
                                             <div class="fileupload_img"><img type="image" src="<?= ($row['video_thumbnail'] != '') ? 'images/video/' . $row['video_thumbnail'] : 'assets/images/square.jpg' ?>" style="width: 120px;height: 120px" alt="Radio image" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <div id="video_local_display" class="form-group" style="display:none;">
+                                    <label class="col-md-3 control-label">Video Upload :-</label>
+                                    <div class="col-md-6">
+
+                                        <input type="hidden" name="video_file_name" id="video_file_name" value="" class="form-control">
+                                        <input type="file" name="video_local" id="video_local" value="" class="form-control">
+
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
+                                        </div>
+
+                                        <div class="msg"></div>
+                                        <input type="button" id="btn" class="btn-success" value="Upload" />
+                                    </div>
+                                </div><br>
+                                <div id="thumbnail" class="form-group" style="display:none;">
+                                    <label class="col-md-3 control-label">Thumbnail Image:-
+                                        <p class="control-label-help">(Recommended resolution: 300*400,400*500 or Rectangle Image)</p>
+                                    </label>
+                                    <div class="col-md-6">
+                                        <div class="fileupload_block">
+                                            <input type="file" name="video_thumbnail" value="" id="fileupload">
+                                            <div class="fileupload_img"><img type="image" src="" style="width: 120px;height: 120px" alt="Radio image" /></div>
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +298,7 @@ if (isset($_POST['submit'])) {
 
             if (type == "youtube" || type == "vimeo" || type == "dailymotion" || type == "server_url")
             {
-                //alert(type);
+                //  alert(type);
                 $("#video_url_display").show();
                 $("#video_local_display").hide();
                 $("#thumbnail").hide();
