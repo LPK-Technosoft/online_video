@@ -30,8 +30,8 @@ if (isset($_GET['status'])) {
 
     $query = "SELECT COUNT(*) as num FROM $tableName WHERE $status";
 
-    $video_qry = "SELECT * FROM tbl_video
-                  LEFT JOIN tbl_category ON tbl_video.`cat_id`= tbl_category.`cid`
+    $video_qry = "SELECT tbl_video.status as video_status,tbl_video.*,tbl_category.* FROM tbl_video
+                  INNER JOIN tbl_category ON tbl_video.`cat_id`= tbl_category.`cid`
                   WHERE $status 
                   ORDER BY tbl_video.`id` DESC LIMIT $start, $limit";
 
@@ -43,11 +43,10 @@ if (isset($_GET['status'])) {
 
         $query = "SELECT COUNT(*) as num FROM $tableName WHERE $status AND `cat_id`='$cat_id'";
 
-        $video_qry = "SELECT * FROM tbl_video
+        $video_qry = "SELECT tbl_video.status as video_status,tbl_video.*,tbl_category.* FROM tbl_video
                   LEFT JOIN tbl_category ON tbl_video.`cat_id`= tbl_category.`cid`
                   WHERE $status AND tbl_video.`cat_id`='$cat_id'
                   ORDER BY tbl_video.`id` DESC LIMIT $start, $limit";
-
         $targetpage = "manage_video.php?status=" . $_GET['status'] . '&category=$cat_id';
     }
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
@@ -59,7 +58,7 @@ if (isset($_GET['status'])) {
     $query = "SELECT COUNT(*) as num FROM $tableName WHERE `ct_id`='$cat_id'";
     $targetpage = "manage_video.php?category=$cat_id";
 
-    $video_qry = "SELECT * FROM tbl_video
+    $video_qry = "SELECT tbl_video.status as video_status,tbl_video.*,tbl_category.* FROM tbl_video
                   LEFT JOIN tbl_category ON tbl_video.`cat_id`= tbl_category.`cid`
                   WHERE tbl_video.`cat_id`='$cat_id' ORDER BY tbl_video.`id` DESC LIMIT $start, $limit";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
@@ -78,7 +77,7 @@ if (isset($_GET['status'])) {
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
     $total_pages = $total_pages['num'];
 
-    $video_qry = "SELECT * FROM tbl_video
+    $video_qry = "SELECT tbl_video.status as video_status,tbl_video.*,tbl_category.* FROM tbl_video
                   LEFT JOIN tbl_category ON tbl_video.`cat_id`= tbl_category.`cid`
                   WHERE (`video_title` LIKE '%$keyword%' OR `video_description` LIKE '%$keyword%') 
                   ORDER BY tbl_video.`id` DESC LIMIT $start, $limit";
@@ -91,9 +90,10 @@ if (isset($_GET['status'])) {
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
     $total_pages = $total_pages['num'];
 
-    $video_qry = "SELECT * FROM tbl_video
+    $video_qry = "SELECT tbl_video.status as video_status,tbl_video.*,tbl_category.* FROM tbl_video
                   LEFT JOIN tbl_category ON tbl_video.`cat_id`= tbl_category.`cid` 
                   ORDER BY tbl_video.`id` DESC LIMIT $start, $limit";
+    // echo $video_qry;
 }
 
 $result = mysqli_query($mysqli, $video_qry);
@@ -144,6 +144,23 @@ $result = mysqli_query($mysqli, $video_qry);
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div style="padding: 0px 0px 5px;">
+                            <select name="status" class="form-control select2 filter">
+                                <option value="">All</option>
+                                <option value="enable" <?php
+                                if (isset($_GET['status']) && $_GET['status'] == 'enable') {
+                                    echo 'selected';
+                                }
+                                ?>>Enable</option>
+                                <option value="disable" <?php
+                                if (isset($_GET['status']) && $_GET['status'] == 'disable') {
+                                    echo 'selected';
+                                }
+                                ?>>Disable</option>
+                            </select>
+                        </div>
+                    </div>
                 </form>
                 <div class="col-md-3 col-xs-12 text-right" style="float: right;">
                     <div class="checkbox" style="width: 95px;margin-top: 5px;margin-left: 10px;right: 100px;position: absolute;">
@@ -173,7 +190,11 @@ $result = mysqli_query($mysqli, $video_qry);
                                 <div class="block_wallpaper">
                                     <div class="wall_category_block">
                                         <h2><?php echo $row['category_name']; ?></h2>  
-
+                                        <div class="checkbox" style="float: right;">
+                                            <input type="checkbox" name="post_ids[]" id="checkbox<?php echo $i; ?>" value="<?php echo $row['id']; ?>" class="post_ids">
+                                            <label for="checkbox<?php echo $i; ?>">
+                                            </label>
+                                        </div>
                                     </div>
                                     <div class="wall_image_title">
                                         <p style="font-size: 16px;"><?php echo $row['video_title']; ?></p>
@@ -184,7 +205,10 @@ $result = mysqli_query($mysqli, $video_qry);
                                             <li><a href="edit_video.php?video_id=<?php echo $row['id']; ?>&redirect=<?= $redirectUrl ?>" data-toggle="tooltip" data-tooltip="Edit"><i class="fa fa-edit"></i></a></li>
                                             <li><a href="javascript:void(0)" class="btn_delete_a" data-id="<?php echo $row['id']; ?>"  data-toggle="tooltip" data-tooltip="Delete"><i class="fa fa-trash"></i></a></li>
 
-                                            <?php if ($row['status'] != "0") { ?>
+                                            <?php
+                                            if ($row['video_status'] != "0") {
+                                                // echo $row['video_status'];
+                                                ?>
                                                 <li><div class="row toggle_btn"><a href="javascript:void(0)" data-id="<?php echo $row['id']; ?>" data-action="deactive" data-column="status" data-toggle="tooltip" data-tooltip="ENABLE"><img src="assets/images/btn_enabled.png" alt="wallpaper_1" /></a></div></li>
 
                                             <?php } else { ?>
@@ -237,14 +261,14 @@ $result = mysqli_query($mysqli, $video_qry);
             var _id = $(this).data("id");
             var _column = $(this).data("column");
             var _table = 'tbl_video';
-            alert(_id);
+
             $.ajax({
                 type: 'post',
                 url: 'processData.php',
                 dataType: 'json',
                 data: {id: _id, for_action: _for, column: _column, table: _table, 'action': 'toggle_status', 'tbl_id': 'id'},
                 success: function (res) {
-                    console.log(res);
+                    //alert(res);
                     if (res.status == '1') {
                         location.reload();
                     }

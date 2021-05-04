@@ -26,7 +26,6 @@ switch ($_POST['action']) {
         $column = $_POST['column'];
         $tbl_id = $_POST['tbl_id'];
         $table_nm = $_POST['table'];
-
         if ($for_action == 'active') {
             $data = array($column => '1');
             $edit_status = Update($table_nm, $data, "WHERE $tbl_id = '$id'");
@@ -162,7 +161,7 @@ switch ($_POST['action']) {
 
                 $deleteSql = "DELETE FROM tbl_radio WHERE `id` IN ($ids)";
                 mysqli_query($mysqli, $deleteSql);
-            }else if ($table == 'tbl_video') {
+            } else if ($table == 'tbl_video') {
 
                 $sql = "SELECT * FROM tbl_video WHERE `id` IN ($ids)";
                 $res = mysqli_query($mysqli, $sql);
@@ -177,8 +176,7 @@ switch ($_POST['action']) {
 
                 $deleteSql = "DELETE FROM tbl_video WHERE `id` IN ($ids)";
                 mysqli_query($mysqli, $deleteSql);
-            }
-            else if ($table == 'tbl_mp3') {
+            } else if ($table == 'tbl_mp3') {
 
                 $sql = "SELECT * FROM tbl_mp3 WHERE `id` IN ($ids)";
                 $res = mysqli_query($mysqli, $sql);
