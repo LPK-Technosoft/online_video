@@ -222,8 +222,8 @@ switch ($_POST['action']) {
 
                 $deleteSql = "DELETE FROM tbl_user_suggest WHERE `user_id`='$id'";
                 mysqli_query($mysqli, $deleteSql);
-            } else if ($table == 'tbl_user_suggest') {
-                $sql = "SELECT * FROM tbl_user_suggest WHERE `id` IN ($ids)";
+            } else if ($table == 'tbl_contact_us') {
+                $sql = "SELECT * FROM tbl_contact_us WHERE `id` IN ($ids)";
                 $res = mysqli_query($mysqli, $sql);
                 while ($row = mysqli_fetch_assoc($res)) {
 
@@ -232,7 +232,7 @@ switch ($_POST['action']) {
                     }
                 }
 
-                $deleteSql = "DELETE FROM tbl_user_suggest WHERE `id` IN ($ids)";
+                $deleteSql = "DELETE FROM tbl_contact_us WHERE `id` IN ($ids)";
                 mysqli_query($mysqli, $deleteSql);
             } else if ($table == 'tbl_theme') {
                 $deleteSql = "DELETE FROM tbl_theme WHERE `id` IN ($ids)";

@@ -1,15 +1,15 @@
 <?php
 
-$page_title="Manage Suggestion";
+$page_title="Manage Contact Us";
 
 include("includes/header.php");
 require("includes/function.php");
 require("language/language.php");
 
-$sql="SELECT suggets.*, users.`name` FROM tbl_user_suggest suggets
+$sql="SELECT tbl_contact_us.*, users.`name` FROM tbl_contact_us
       LEFT JOIN  tbl_users users
-      ON suggets.`user_id`=users.`id`
-      ORDER BY suggets.`id` DESC";
+      ON tbl_contact_us.`user_id`=users.`id`
+      ORDER BY tbl_contact_us.`id` DESC";
 
 $result=mysqli_query($mysqli,$sql);
 
@@ -107,7 +107,7 @@ $result=mysqli_query($mysqli,$sql);
     e.preventDefault();
 
     var _ids=$(this).data("id");
-    var _table='tbl_user_suggest';
+    var _table='tbl_contact_us';
 
     swal({
       title: "Are you sure to delete this?",
@@ -134,7 +134,7 @@ $result=mysqli_query($mysqli,$sql);
             if(res.status=='1'){
               swal({
                 title: "Successfully", 
-                text: "Suggestion is deleted.", 
+                text: "Contact is deleted.", 
                 type: "success"
               },function() {
                 location.reload();
@@ -177,7 +177,7 @@ $result=mysqli_query($mysqli,$sql);
       function(isConfirm) {
         if (isConfirm) {
 
-          var _table = 'tbl_user_suggest';
+          var _table = 'tbl_contact_us';
 
           $.ajax({
             type: 'post',
@@ -195,7 +195,7 @@ $result=mysqli_query($mysqli,$sql);
               if (res.status == '1') {
                 swal({
                   title: "Successfully",
-                  text: "Suggestion is deleted successfully",
+                  text: "Contact is deleted successfully",
                   type: "success"
                 }, function() {
                   location.reload();

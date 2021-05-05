@@ -166,12 +166,13 @@ if (isset($_POST['submit'])) {
                             <?php
                             if ($row['video_type'] == 'local') {
                                 ?>
-                                <div id="video_local_display" class="form-group" style="display:none;">
+                                <div id="video_local_display" class="form-group">
                                     <label class="col-md-3 control-label">Video Upload :-</label>
                                     <div class="col-md-6">
 
                                         <input type="hidden" name="video_file_name" id="video_file_name" value="" class="form-control">
                                         <input type="file" name="video_local" id="video_local" value="" class="form-control">
+                                        <div><label class="control-label">Current URL :-</label><?php echo "uploads/".$row['video_upload']?></div>
 
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
@@ -181,7 +182,7 @@ if (isset($_POST['submit'])) {
                                         <input type="button" id="btn" class="btn-success" value="Upload" />
                                     </div>
                                 </div><br>
-                                <div id="thumbnail" class="form-group" style="display:none;">
+                                <div id="thumbnail" class="form-group" >
                                     <label class="col-md-3 control-label">Thumbnail Image:-
                                         <p class="control-label-help">(Recommended resolution: 300*400,400*500 or Rectangle Image)</p>
                                     </label>

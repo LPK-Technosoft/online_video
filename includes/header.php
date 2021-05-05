@@ -151,10 +151,10 @@ $mysqli->set_charset("utf8mb4");
                             </a> 
                         </li>
 
-                        <li <?php if ($currentFile == "manage_suggest.php") { ?>class="active"<?php } ?>> 
-                            <a href="manage_suggest.php">
+                        <li <?php if ($currentFile == "manage_contact_us.php") { ?>class="active"<?php } ?>> 
+                            <a href="manage_contact_us.php">
                                 <div class="icon"> <i class="fa fa-music" aria-hidden="true"></i> </div>
-                                <div class="title">User Suggest</div>
+                                <div class="title">Contact Us</div>
                             </a> 
                         </li>
                         <li <?php if ($currentFile == "manage_reports.php") { ?>class="active"<?php } ?>> 

@@ -20,6 +20,10 @@ $qry_category = "SELECT COUNT(*) as num FROM tbl_category";
 $total_category = mysqli_fetch_array(mysqli_query($mysqli, $qry_category));
 $total_category = $total_category['num'];
 
+$qry_video = "SELECT COUNT(*) as num FROM tbl_video";
+$total_video = mysqli_fetch_array(mysqli_query($mysqli, $qry_video));
+$total_video = $total_video['num'];
+
 $qry_demand = "SELECT COUNT(*) as num FROM tbl_mp3";
 $total_demand = mysqli_fetch_array(mysqli_query($mysqli, $qry_demand));
 $total_demand = $total_demand['num'];
@@ -143,6 +147,15 @@ if ($smtp_warning) {
                 <div class="content">
                     <div class="title">Categories</div>
                     <div class="value"><span class="sign"></span><?php echo thousandsNumberFormat($total_category); ?></div>
+                </div>
+            </div>
+        </a> 
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12"> <a href="manage_video.php" class="card card-banner card-pink-light">
+            <div class="card-body"> <i class="icon fa fa-video-camera fa-4x"></i>
+                <div class="content">
+                    <div class="title">Video</div>
+                    <div class="value"><span class="sign"></span><?php echo thousandsNumberFormat($total_video); ?></div>
                 </div>
             </div>
         </a> 

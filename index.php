@@ -58,10 +58,10 @@ if(isset($_SESSION['admin_name']))
                   <?php unset($_SESSION['msg']);}?>
                 </div>
                 <div class="input-group"> <span class="input-group-addon" id="basic-addon1"> <i class="fa fa-user" aria-hidden="true"></i></span>
-                  <input type="text" name="username" id="username" class="form-control" placeholder="Username" value="admin" aria-describedby="basic-addon1">
+                  <input type="text" name="username" id="username" class="form-control" placeholder="Username" value="" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group"> <span class="input-group-addon" id="basic-addon2"> <i class="fa fa-key" aria-hidden="true"></i></span>
-                  <input type="password" name="password" id="password" class="form-control" placeholder="Password" value="admin" aria-describedby="basic-addon2">
+                  <input type="password" name="password" id="password" class="form-control" placeholder="Password" value="" aria-describedby="basic-addon2">
                 </div>
                 <div class="text-center">
                   <input type="submit" class="btn btn-success btn-submit" value="Login">

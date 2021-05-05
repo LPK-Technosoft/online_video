@@ -39,7 +39,7 @@ echo $file_path;
                 <br><b>User Profile Update</b>(Method: user_profile_update) (Parameter: user_id, name, email, password, phone)
                 <br><b>Forgot Password</b>(Method: forgot_pass) (Parameter: user_email)
                 <br><b>Report</b>(Method: add_report) (Parameter: report_type, report_user_id, report_email, post_id, report_text)
-                <br><b>User Suggest Song</b>(Method: add_user_suggest) (Parameter: title, description, image)
+                <br><b>Contact Us</b>(Method: add_contact_us) (Parameter: title, description, image)
                 <br><b>Favorite Post</b>(Method: favorite_post) (Parameter: post_id, user_id, type[song/radio])
                 <br><b>Get Favorite Post</b>(Method: get_favorite_post) (Parameter: user_id, type[song/radio])
                 <br><b>App Details</b>(Method: get_app_details)
