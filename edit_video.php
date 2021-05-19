@@ -21,28 +21,25 @@ if (isset($_GET['video_id'])) {
 }
 
 if (isset($_POST['submit'])) {
-    if ($_POST['video_type'] == "youtube") {
-        $data = array(
-            'cat_id' => cleanInput($_POST['cat_id']),
-            'video_title' => cleanInput($_POST['video_title']),
-            'video_type' => cleanInput($_POST['video_type']),
-            'video_upload' => '',
-            'video_url' => trim($_POST['video_url']),
-            'video_description' => addslashes($_POST['video_description']),
-            'video_thumbnail' => ''
-        );
+    if ($_POST['video_type'] == 'youtube') {
+        $link = $_POST['video_url'];
+        $video_id = explode("?v=", $link);
+        $video_id = $video_id[1];
+        $thumbnail = "http://img.youtube.com/vi/" . $video_id . "/maxresdefault.jpg";
+        $ext = pathinfo($thumbnail, PATHINFO_EXTENSION);
+
+        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
+
+        //Main Image
+        $tpath1 = 'images/video/' . $video_image;
+
+        if ($ext != 'png') {
+            $pic1 = compress_image($thumbnail, $tpath1, 80);
+        } else {
+            $tmp = $_FILES['video_thumbnail']['tmp_name'];
+            move_uploaded_file($tmp, $tpath1);
+        }
     } else {
-        $data = array(
-            'cat_id' => cleanInput($_POST['cat_id']),
-            'video_title' => cleanInput($_POST['video_title']),
-            'video_type' => cleanInput($_POST['video_type']),
-            'video_upload' => cleanInput($_POST['video_file_name']),
-            'video_url' => '',
-            'video_description' => addslashes($_POST['video_description']),
-            'video_thumbnail' => $video_image
-        );
-    }
-    if ($_FILES['video_thumbnail']['name'] != "") {
         $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
 
         $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
@@ -56,9 +53,30 @@ if (isset($_POST['submit'])) {
             $tmp = $_FILES['video_thumbnail']['tmp_name'];
             move_uploaded_file($tmp, $tpath1);
         }
-
-        $data = array_merge($data, array("video_thumbnail" => $video_image));
     }
+    if ($_POST['video_type'] == "youtube") {
+        
+        $data = array(
+            'cat_id' => cleanInput($_POST['cat_id']),
+            'video_title' => cleanInput($_POST['video_title']),
+            'video_type' => cleanInput($_POST['video_type']),
+            'video_upload' => '',
+            'video_url' => trim($_POST['video_url']),
+            'video_description' => addslashes($_POST['video_description']),
+            'video_thumbnail' => $video_image
+        );
+    } else {
+        $data = array(
+            'cat_id' => cleanInput($_POST['cat_id']),
+            'video_title' => cleanInput($_POST['video_title']),
+            'video_type' => cleanInput($_POST['video_type']),
+            'video_upload' => cleanInput($_POST['video_file_name']),
+            'video_url' => '',
+            'video_description' => addslashes($_POST['video_description']),
+            'video_thumbnail' => $video_image
+        );
+    }
+    
 
     $qry = Update('tbl_video', $data, "WHERE id = '" . $_GET['video_id'] . "'");
 
@@ -172,7 +190,7 @@ if (isset($_POST['submit'])) {
 
                                         <input type="hidden" name="video_file_name" id="video_file_name" value="" class="form-control">
                                         <input type="file" name="video_local" id="video_local" value="" class="form-control">
-                                        <div><label class="control-label">Current URL :-</label><?php echo "uploads/".$row['video_upload']?></div>
+                                        <div><label class="control-label">Current URL :-</label><?php echo "uploads/" . $row['video_upload'] ?></div>
 
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>

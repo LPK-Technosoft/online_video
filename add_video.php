@@ -12,20 +12,40 @@ $category_result = mysqli_query($mysqli, $category_qry);
 
 if (isset($_POST['submit'])) {
 
-    $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
 
-    $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
+    if ($_POST['video_type'] == 'youtube') {
+        $link = $_POST['video_url'];
+        $video_id = explode("?v=", $link);
+        $video_id = $video_id[1];
+        $thumbnail = "http://img.youtube.com/vi/" . $video_id . "/maxresdefault.jpg";
+        $ext = pathinfo($thumbnail, PATHINFO_EXTENSION);
 
-    //Main Image
-    $tpath1 = 'images/video/' . $video_image;
+        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
 
-    if ($ext != 'png') {
-        $pic1 = compress_image($_FILES["video_thumbnail"]["tmp_name"], $tpath1, 80);
+        //Main Image
+        $tpath1 = 'images/video/' . $video_image;
+
+        if ($ext != 'png') {
+            $pic1 = compress_image($thumbnail, $tpath1, 80);
+        } else {
+            $tmp = $_FILES['video_thumbnail']['tmp_name'];
+            move_uploaded_file($tmp, $tpath1);
+        }
     } else {
-        $tmp = $_FILES['video_thumbnail']['tmp_name'];
-        move_uploaded_file($tmp, $tpath1);
-    }
+        $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
 
+        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
+
+        //Main Image
+        $tpath1 = 'images/video/' . $video_image;
+
+        if ($ext != 'png') {
+            $pic1 = compress_image($_FILES["video_thumbnail"]["tmp_name"], $tpath1, 80);
+        } else {
+            $tmp = $_FILES['video_thumbnail']['tmp_name'];
+            move_uploaded_file($tmp, $tpath1);
+        }
+    }
     $data = array(
         'cat_id' => cleanInput($_POST['cat_id']),
         'video_title' => cleanInput($_POST['video_title']),

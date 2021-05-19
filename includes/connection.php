@@ -49,6 +49,7 @@ define("API_LATEST_LIMIT", $settings_details['api_latest_limit']);
 define("API_CITY_ORDER_BY", $settings_details['api_city_order_by']);
 define("API_CITY_POST_ORDER_BY", $settings_details['api_city_post_order_by']);
 define("API_LANG_ORDER_BY", $settings_details['api_lang_order_by']);
+define("SERVER_KEY", 'AAAA4912N7w:APA91bFh51jg2H6HlP4UUO4EtdTqQysK7dSr9MfgQqKcBOoKn_oDWmoABeIq43BVWBoZIgILGpaHvEMUuTGi8KEiK5hulexlZwU4Hy6cbQZ_bf-cOWbpzYk_EC07X2PfxINJuyiaecVZ');
 
 
 //Profile
