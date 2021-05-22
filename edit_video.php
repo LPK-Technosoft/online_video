@@ -163,7 +163,7 @@ if (isset($_POST['submit'])) {
                             <?php
                             if ($row['video_type'] == 'youtube') {
                                 ?>
-                                <div class="form-group" id="video_url_display" style="display:none;">
+                                <div class="form-group" id="video_url_display">
                                     <label class="col-md-3 control-label">Video URL :-</label>
                                     <div class="col-md-6">
                                         <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>

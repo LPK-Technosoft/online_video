@@ -5,7 +5,6 @@ include("includes/header.php");
 include("includes/function.php");
 
 $file_path = getBaseUrl() . 'api.php';
-echo $file_path;
 ?>
 <div class="row">
     <div class="col-sm-12 col-xs-12">
@@ -33,8 +32,8 @@ echo $file_path;
 				        <br><b>Category wise On Demand</b>(Method: get_on_demand_cat_id) (Parameter: on_demand_cat_id)
         				<br><b>On Demand Single</b>(Method: get_on_demand_single) (Parameter: on_demand_single)
         				<br><b>Theme</b>(Method: get_themes)
-        				<br><b>User Register</b>(Method: user_register) (Parameter: name, email, password, phone, auth_id, type(Normal, Google, Facebook))
-                <br><b>User Login</b>(Method: user_login) (Parameter: email, password, auth_id, type[Normal, Google, Facebook])
+        				<br><b>User Register</b>(Method: user_register) (Parameter: name, email, password, phone, type(Normal, Google, Facebook))
+                <br><b>User Login</b>(Method: user_login) (Parameter: email, password, type[Normal, Google, Facebook])
                 <br><b>User Profile</b>(Method: user_profile) (Parameter: id)
                 <br><b>User Profile Update</b>(Method: user_profile_update) (Parameter: user_id, name, email, password, phone)
                 <br><b>Forgot Password</b>(Method: forgot_pass) (Parameter: user_email)
@@ -48,7 +47,7 @@ echo $file_path;
 				        <br><b>Most View Video List</b>(Method: get_most_video_view)
                 <br><b>Search Video</b>(Method: get_search_video) (Parameter: search_text)
                 <br><b>Latest Video</b>(Method: get_latest_video)
-                
+                <br><b>Notification Details</b>(Method: fcm_token_list) (Parameter: fcm_id, fcm_token)
                 </code> 
                 </pre>
 
