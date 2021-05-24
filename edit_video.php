@@ -18,65 +18,66 @@ if (isset($_GET['video_id'])) {
     $qry = "SELECT * FROM tbl_video WHERE id='" . $_GET['video_id'] . "'";
     $result = mysqli_query($mysqli, $qry);
     $row = mysqli_fetch_assoc($result);
+//    print_r($row);
 }
 
 if (isset($_POST['submit'])) {
-    if ($_POST['video_type'] == 'youtube') {
-        $link = $_POST['video_url'];
-        $video_id = explode("?v=", $link);
-        $video_id = $video_id[1];
-        $thumbnail = "http://img.youtube.com/vi/" . $video_id . "/maxresdefault.jpg";
-        $ext = pathinfo($thumbnail, PATHINFO_EXTENSION);
-
-        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
-
-        //Main Image
-        $tpath1 = 'images/video/' . $video_image;
-
-        if ($ext != 'png') {
-            $pic1 = compress_image($thumbnail, $tpath1, 80);
-        } else {
-            $tmp = $_FILES['video_thumbnail']['tmp_name'];
-            move_uploaded_file($tmp, $tpath1);
-        }
-    } else {
-        $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
-
-        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
-
-        //Main Image
-        $tpath1 = 'images/video/' . $video_image;
-
-        if ($ext != 'png') {
-            $pic1 = compress_image($_FILES["video_thumbnail"]["tmp_name"], $tpath1, 80);
-        } else {
-            $tmp = $_FILES['video_thumbnail']['tmp_name'];
-            move_uploaded_file($tmp, $tpath1);
-        }
-    }
+//    if ($_POST['video_type'] == 'youtube') {
+//        $link = $_POST['video_url'];
+//        $video_id = explode("?v=", $link);
+//        $video_id = $video_id[1];
+//        $thumbnail = "http://img.youtube.com/vi/" . $video_id . "/maxresdefault.jpg";
+//        $ext = pathinfo($thumbnail, PATHINFO_EXTENSION);
+//
+//        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
+//
+//        //Main Image
+//        $tpath1 = 'images/video/' . $video_image;
+//
+//        if ($ext != 'png') {
+//            $pic1 = compress_image($thumbnail, $tpath1, 80);
+//        } else {
+//            $tmp = $_FILES['video_thumbnail']['tmp_name'];
+//            move_uploaded_file($tmp, $tpath1);
+//        }
+//    } else {
+//        $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
+//
+//        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
+//
+//        //Main Image
+//        $tpath1 = 'images/video/' . $video_image;
+//
+//        if ($ext != 'png') {
+//            $pic1 = compress_image($_FILES["video_thumbnail"]["tmp_name"], $tpath1, 80);
+//        } else {
+//            $tmp = $_FILES['video_thumbnail']['tmp_name'];
+//            move_uploaded_file($tmp, $tpath1);
+//        }
+//    }
     if ($_POST['video_type'] == "youtube") {
-        
+
         $data = array(
-            'cat_id' => cleanInput($_POST['cat_id']),
+//            'cat_id' => cleanInput($_POST['cat_id']),
             'video_title' => cleanInput($_POST['video_title']),
-            'video_type' => cleanInput($_POST['video_type']),
-            'video_upload' => '',
-            'video_url' => trim($_POST['video_url']),
+//            'video_type' => cleanInput($_POST['video_type']),
+//            'video_upload' => '',
+//            'video_url' => trim($_POST['video_url']),
             'video_description' => addslashes($_POST['video_description']),
-            'video_thumbnail' => $video_image
+//            'video_thumbnail' => $video_image
         );
     } else {
         $data = array(
-            'cat_id' => cleanInput($_POST['cat_id']),
+//            'cat_id' => cleanInput($_POST['cat_id']),
             'video_title' => cleanInput($_POST['video_title']),
-            'video_type' => cleanInput($_POST['video_type']),
-            'video_upload' => cleanInput($_POST['video_file_name']),
-            'video_url' => '',
+//            'video_type' => cleanInput($_POST['video_type']),
+//            'video_upload' => cleanInput($_POST['video_file_name']),
+//            'video_url' => '',
             'video_description' => addslashes($_POST['video_description']),
-            'video_thumbnail' => $video_image
+//            'video_thumbnail' => $video_image
         );
     }
-    
+
 
     $qry = Update('tbl_video', $data, "WHERE id = '" . $_GET['video_id'] . "'");
 
@@ -110,13 +111,13 @@ if (isset($_POST['submit'])) {
             <div class="clearfix"></div>
             <div class="card-body mrg_bottom"> 
                 <form action="" name="edit_form" method="post" class="form form-horizontal" enctype="multipart/form-data">
-                    <input  type="hidden" name="radio_id" value="<?php echo $_GET['radio_id']; ?>" />
+                    <input  type="hidden" name="radio_id" id="vid_id" value="<?php echo $_GET['video_id']; ?>" />
                     <div class="section">
                         <div class="section-body">
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Category :-</label>
                                 <div class="col-md-6">
-                                    <select name="cat_id" id="cat_id" class="select2" required>
+                                    <select name="cat_id" id="cat_id" class="select2" disabled="">
                                         <option value="">--Select Category--</option>
                                         <?php
                                         while ($category_row = mysqli_fetch_array($category_result)) {
@@ -137,7 +138,7 @@ if (isset($_POST['submit'])) {
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Video Type :-</label>
                                 <div class="col-md-6">                       
-                                    <select name="video_type" id="video_type" style="width:280px; height:25px;" class="select2" required>
+                                    <select name="video_type" id="video_type" style="width:280px; height:25px;" class="select2" disabled="">
                                         <option value="">--Select Type--</option>
                                         <?php
                                         if ($row['video_type'] == 'youtube') {
@@ -145,7 +146,7 @@ if (isset($_POST['submit'])) {
                                             <option value="youtube" selected="">Youtube</option>
                                             <option value="local">From Local</option>
                                             <?php
-                                        } elseif ($row['video_type'] == 'local') {
+                                        } else if ($row['video_type'] == 'local') {
                                             ?>
                                             <option value="youtube">Youtube</option>
                                             <option value="local" selected="">From Local</option>
@@ -166,22 +167,21 @@ if (isset($_POST['submit'])) {
                                 <div class="form-group" id="video_url_display">
                                     <label class="col-md-3 control-label">Video URL :-</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>
+                                        <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" disabled="">
                                     </div>
                                 </div>
                                 <?php
-                            } else {
-                                ?>
-                                <div class="form-group" id="video_url_display" style="display:none;">
-                                    <label class="col-md-3 control-label">Video URL :-</label>
-                                    <div class="col-md-6">
-                                        <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>
-                                    </div>
-                                </div>
-                                <?php
-                            }
+                            }else{
                             ?>
+<!--                            <div class="form-group" id="video_url_display1" style="display:none;">
+                                <label class="col-md-3 control-label">Video URL :-</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>
+                                </div>
+                            </div>-->
+
                             <?php
+                            }
                             if ($row['video_type'] == 'local') {
                                 ?>
                                 <div id="video_local_display" class="form-group">
@@ -189,7 +189,7 @@ if (isset($_POST['submit'])) {
                                     <div class="col-md-6">
 
                                         <input type="hidden" name="video_file_name" id="video_file_name" value="" class="form-control">
-                                        <input type="file" name="video_local" id="video_local" value="" class="form-control">
+                                        <input type="file" name="video_local" id="video_local" value="" class="form-control" disabled>
                                         <div><label class="control-label">Current URL :-</label><?php echo "uploads/" . $row['video_upload'] ?></div>
 
                                         <div class="progress">
@@ -197,7 +197,7 @@ if (isset($_POST['submit'])) {
                                         </div>
 
                                         <div class="msg"></div>
-                                        <input type="button" id="btn" class="btn-success" value="Upload" />
+                                        <input type="button" id="btn" class="btn-success" value="Upload" disabled/>
                                     </div>
                                 </div><br>
                                 <div id="thumbnail" class="form-group" >
@@ -206,7 +206,7 @@ if (isset($_POST['submit'])) {
                                     </label>
                                     <div class="col-md-6">
                                         <div class="fileupload_block">
-                                            <input type="file" name="video_thumbnail" value="" id="fileupload">
+                                            <input type="file" name="video_thumbnail" value="" id="fileupload" disabled>
                                             <div class="fileupload_img"><img type="image" src="<?= ($row['video_thumbnail'] != '') ? 'images/video/' . $row['video_thumbnail'] : 'assets/images/square.jpg' ?>" style="width: 120px;height: 120px" alt="Radio image" /></div>
                                         </div>
                                     </div>
@@ -219,7 +219,7 @@ if (isset($_POST['submit'])) {
                                     <div class="col-md-6">
 
                                         <input type="hidden" name="video_file_name" id="video_file_name" value="" class="form-control">
-                                        <input type="file" name="video_local" id="video_local" value="" class="form-control">
+                                        <input type="file" name="video_local" id="video_local" value="" class="form-control" disabled>
 
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
@@ -266,7 +266,7 @@ if (isset($_POST['submit'])) {
 
 <?php include("includes/footer.php"); ?>       
 
-<script>
+<!--<script>
     $(function () {
         $('#btn').click(function () {
             $('.myprogress').css('width', '0');
@@ -278,6 +278,8 @@ if (isset($_POST['submit'])) {
             }
             var formData = new FormData();
             formData.append('video_local', $('#video_local')[0].files[0]);
+            var id = document.getElementById('vid_id').value;
+            formData.append('id', id);
             $('#btn').attr('disabled', 'disabled');
             $('.msg').text('Uploading in progress...');
             $.ajax({
@@ -300,7 +302,7 @@ if (isset($_POST['submit'])) {
                     return xhr;
                 },
                 success: function (data) {
-
+                    //alert(data);
                     $('#video_file_name').val(data);
                     $('.msg').text("File uploaded successfully!!");
                     $('#btn').removeAttr('disabled');
@@ -308,8 +310,8 @@ if (isset($_POST['submit'])) {
             });
         });
     });
-</script>
-<script type="text/javascript">
+</script>-->
+<!--<script type="text/javascript">
     $(document).ready(function (e) {
         $("#video_type").change(function () {
 
@@ -331,9 +333,9 @@ if (isset($_POST['submit'])) {
 
         });
     });
-</script>
+</script>-->
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $("input[name='video_thumbnail']").change(function () {
         var file = $(this);
 
@@ -351,4 +353,4 @@ if (isset($_POST['submit'])) {
             }
         }
     });
-</script>
+</script>-->

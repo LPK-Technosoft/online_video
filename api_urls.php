@@ -19,6 +19,7 @@ $file_path = getBaseUrl() . 'api.php';
                 <br><b>API URL</b>&nbsp; <?php echo $file_path; ?>    
 
                 <br><b>Home</b>(Method: get_home_radio)
+                <br><b>Home Video</b>(Method: get_home_video)
                 <br><b>Latest Radio</b>(Method: get_latest_radio)
                 <br><b>Featured Radio</b>(Method: get_featured_radio)
                 <br><b>Language List</b>(Method: lang_list)
@@ -47,6 +48,7 @@ $file_path = getBaseUrl() . 'api.php';
 				        <br><b>Most View Video List</b>(Method: get_most_video_view)
                 <br><b>Search Video</b>(Method: get_search_video) (Parameter: search_text)
                 <br><b>Latest Video</b>(Method: get_latest_video)
+                <br><b>All Video</b>(Method: get_all_video)
                 <br><b>Notification Details</b>(Method: fcm_token_list) (Parameter: fcm_id, fcm_token)
                 </code> 
                 </pre>

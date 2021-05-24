@@ -53,13 +53,13 @@ if (isset($_POST['submit'])) {
 
 <div class="row">
     <div class="col-md-12">
-<?php
-if (isset($_GET['redirect'])) {
-    echo '<a href="' . $_GET['redirect'] . '" class="btn_back"><h4 class="pull-left" style="font-size: 20px;color: #e91e63"><i class="fa fa-arrow-left"></i> Back</h4></a>';
-} else {
-    echo '<a href="manage_radio.php" class="btn_back"><h4 class="pull-left" style="font-size: 20px;color: #e91e63"><i class="fa fa-arrow-left"></i> Back</h4></a>';
-}
-?>
+        <?php
+        if (isset($_GET['redirect'])) {
+            echo '<a href="' . $_GET['redirect'] . '" class="btn_back"><h4 class="pull-left" style="font-size: 20px;color: #e91e63"><i class="fa fa-arrow-left"></i> Back</h4></a>';
+        } else {
+            echo '<a href="manage_radio.php" class="btn_back"><h4 class="pull-left" style="font-size: 20px;color: #e91e63"><i class="fa fa-arrow-left"></i> Back</h4></a>';
+        }
+        ?>
         <div class="card">
             <div class="page_title_block">
                 <div class="col-md-5 col-xs-12">
@@ -76,13 +76,13 @@ if (isset($_GET['redirect'])) {
                                 <div class="col-md-6">
                                     <select name="lang_id" id="lang_id" class="select2" required>
                                         <option value="">--Select Language--</option>
-<?php
-while ($language_row = mysqli_fetch_array($language_result)) {
-    ?>                       
+                                        <?php
+                                        while ($language_row = mysqli_fetch_array($language_result)) {
+                                            ?>                       
                                             <option value="<?php echo $language_row['lid']; ?>"><?php echo $language_row['language_name']; ?></option>                           
-    <?php
-}
-?>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -91,13 +91,13 @@ while ($language_row = mysqli_fetch_array($language_result)) {
                                 <div class="col-md-6">
                                     <select name="city_id" id="city_id" class="select2" required>
                                         <option value="">--Select City--</option>
-<?php
-while ($cat_row = mysqli_fetch_array($cat_result)) {
-    ?>          						 
+                                        <?php
+                                        while ($cat_row = mysqli_fetch_array($cat_result)) {
+                                            ?>          						 
                                             <option value="<?php echo $cat_row['cid']; ?>"><?php echo $cat_row['city_name']; ?></option>	
-    <?php
-}
-?>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>

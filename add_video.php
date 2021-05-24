@@ -10,6 +10,10 @@ require_once("thumbnail_images.class.php");
 $category_qry = "SELECT * FROM tbl_category ORDER BY category_name";
 $category_result = mysqli_query($mysqli, $category_qry);
 
+$qry = "SELECT id FROM tbl_video ORDER BY id DESC LIMIT 1";
+$result = mysqli_query($mysqli, $qry);
+$row = mysqli_fetch_row($result);
+$id = $row[0];
 if (isset($_POST['submit'])) {
 
 
@@ -83,6 +87,7 @@ if (isset($_POST['submit'])) {
             <div class="clearfix"></div>
             <div class="card-body mrg_bottom"> 
                 <form action="" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                    <input type="hidden" name="id" id="vid_id" value="<?php echo $id; ?>">
                     <div class="section">
                         <div class="section-body">
                             <div class="form-group">
@@ -236,6 +241,10 @@ if (isset($_POST['submit'])) {
             }
             var formData = new FormData();
             formData.append('video_local', $('#video_local')[0].files[0]);
+            var id = document.getElementById('vid_id').value;
+            var num = 1;
+            var add_id = +id+num;
+            formData.append('id', add_id);
             $('#btn').attr('disabled', 'disabled');
             $('.msg').text('Uploading in progress...');
             $.ajax({
@@ -258,7 +267,7 @@ if (isset($_POST['submit'])) {
                     return xhr;
                 },
                 success: function (data) {
-                    alert(data);
+                    //alert(data);
                     $('#video_file_name').val(data);
                     $('.msg').text("File uploaded successfully!!");
                     $('#btn').removeAttr('disabled');

@@ -1,49 +1,11 @@
 <?php
 $page_title = "Send Notification";
-
 include("includes/header.php");
 
 require("includes/function.php");
-require("language/language.php");
+require("language/language.php");	
+require("includes/Notification.php");
 
-class SendNotification {
-
-    public function __construct() {
-        
-    }
-
-    public function sendPushNotificationToGCMSever($tokenArray, $message, $title, $body) {
-
-        $path_to_firebase_cm = 'https://fcm.googleapis.com/fcm/send';
-
-        $fields = array(
-            'registration_ids' => $tokenArray,
-            'data' => $message,
-            'notification' => $message,
-        );
-        //echo json_encode($fields);
-        $headers = array(
-            'Authorization:key=' . SERVER_KEY,
-            'Content-Type:application/json'
-        );
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $path_to_firebase_cm);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-
-        $result = curl_exec($ch);
-
-        curl_close($ch);
-
-        return $result;
-    }
-
-}
 
 if (isset($_POST['submit'])) {
 
@@ -73,11 +35,12 @@ if (isset($_POST['submit'])) {
     $notification_qry = Insert("tbl_notifications", $fields);
 
     $fields = json_encode($fields);
-    print("\nJSON sent:\n");
+    //print("\nJSON sent:\n");
     $user_qry = "SELECT fcm_token FROM firebase_token_list";
     $res = mysqli_query($mysqli, $user_qry);
     while ($row = mysqli_fetch_array($res)) {
         $data[] = array($row['fcm_token']);
+		echo $row['fcm_token']."<br>";
     }
     if (!empty($data)) {
         $serverObject = new SendNotification();
@@ -89,10 +52,12 @@ if (isset($_POST['submit'])) {
             "content_available" => true,
             "sound" => "default",
             "priority" => "high"];
+		//	print_r($data);
         $jsonString = $serverObject->sendPushNotificationToGCMSever($data, $notification, "Online Radio App", $_POST['notification_title']);
 
         $jsonObject = json_decode($jsonString);
         $jsonObject = json_decode(json_encode($jsonObject), TRUE);
+		print_r($jsonObject);
         $fcmResult = array("fcm_multicast_id" => $jsonObject['multicast_id'],
             "fcm_success" => $jsonObject['success'],
             "fcm_failure" => $jsonObject['failure'],
@@ -104,9 +69,12 @@ if (isset($_POST['submit'])) {
         $qry = Insert("firebase_result", $fcmResult);
         $_SESSION['class'] = "success";
         $_SESSION['msg'] = "16";
-        header("Location:send_notification.php");
-        exit;
+        //header("Location:send_notification.php");
+       // exit;
     }
+}else{
+	echo "Not Submit";
+	
 }
 ?>
 
@@ -158,15 +126,14 @@ if (!function_exists("array_column")) {
                     <div role="tabpanel" class="tab-pane" id="send_notification">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <form action="" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                                <div class="col-md-12">							
+                                    <form action="" method="post" name="notification" class="form form-horizontal" enctype="multipart/form-data">
                                         <div class="section">
                                             <div class="section-body">
-
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label">Title :-</label>
                                                     <div class="col-md-6">
-                                                        <input type="text" name="notification_title" id="notification_title" class="form-control" value="" placeholder="" required>
+                                                        <input type="text" name="notification_title" id="notification_title" class="form-control" placeholder="" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -184,7 +151,7 @@ if (!function_exists("array_column")) {
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-9 col-md-offset-3">
-                                                        <button type="submit" name="submit" class="btn btn-primary">Send</button>
+													  <input type="submit" name="submit" value="Send" class="btn btn-primary">                                                        
                                                     </div>
                                                 </div>
                                             </div>

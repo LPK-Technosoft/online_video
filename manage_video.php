@@ -26,6 +26,10 @@ if (isset($_GET['status'])) {
         $status = "tbl_video.`status`='1'";
     } else if ($_GET['status'] == 'disable') {
         $status = "tbl_video.`status`='0'";
+    }else if ($_GET['status'] == 'featured') {
+        $status = "tbl_video.`featured_video`='1'";
+    } else if ($_GET['status'] == 'not_featured') {
+        $status = "tbl_video.`featured_video`='0'";
     }
 
     $query = "SELECT COUNT(*) as num FROM $tableName WHERE $status";
@@ -158,6 +162,17 @@ $result = mysqli_query($mysqli, $video_qry);
                                     echo 'selected';
                                 }
                                 ?>>Disable</option>
+                                <option value="featured" <?php
+                                if (isset($_GET['status']) && $_GET['status'] == 'featured') {
+                                    echo 'selected';
+                                }
+                                ?>>Featured</option>
+                                <option value="not_featured" <?php
+                                if (isset($_GET['status']) && $_GET['status'] == 'not_featured') {
+                                    echo 'selected';
+                                }
+                                ?>>Not Featured</option>
+                                
                             </select>
                         </div>
                     </div>
@@ -189,7 +204,12 @@ $result = mysqli_query($mysqli, $video_qry);
                             <div class="col-lg-3 col-sm-6 col-xs-12">
                                 <div class="block_wallpaper">
                                     <div class="wall_category_block">
-                                        <h2><?php echo $row['category_name']; ?></h2>  
+                                        <h2><?php echo $row['category_name']; ?></h2> 
+                                        <?php if ($row['featured_video'] != "0") { ?>
+                                            <a class="toggle_btn_a" href="javascript:void(0)" data-id="<?php echo $row['id']; ?>" data-action="deactive" data-column="featured_video" data-toggle="tooltip" data-tooltip="Featured"><div style="color:green;"><i class="fa fa-check-circle"></i></div></a> 
+                                        <?php } else { ?>
+                                            <a class="toggle_btn_a" href="javascript:void(0)" data-id="<?php echo $row['id']; ?>" data-action="active" data-column="featured_video" data-toggle="tooltip" data-tooltip="Set Featured"><i class="fa fa-circle"></i></a> 
+                                        <?php } ?> 
                                         <div class="checkbox" style="float: right;">
                                             <input type="checkbox" name="post_ids[]" id="checkbox<?php echo $i; ?>" value="<?php echo $row['id']; ?>" class="post_ids">
                                             <label for="checkbox<?php echo $i; ?>">
@@ -268,7 +288,7 @@ $result = mysqli_query($mysqli, $video_qry);
                 dataType: 'json',
                 data: {id: _id, for_action: _for, column: _column, table: _table, 'action': 'toggle_status', 'tbl_id': 'id'},
                 success: function (res) {
-                    //alert(res);
+                   // alert(res);
                     if (res.status == '1') {
                         location.reload();
                     }
