@@ -17,25 +17,25 @@ $id = $row[0];
 if (isset($_POST['submit'])) {
 
 
-    if ($_POST['video_type'] == 'youtube') {
-        $link = $_POST['video_url'];
-        $video_id = explode("?v=", $link);
-        $video_id = $video_id[1];
-        $thumbnail = "http://img.youtube.com/vi/" . $video_id . "/maxresdefault.jpg";
-        $ext = pathinfo($thumbnail, PATHINFO_EXTENSION);
-
-        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
-
-        //Main Image
-        $tpath1 = 'images/video/' . $video_image;
-
-        if ($ext != 'png') {
-            $pic1 = compress_image($thumbnail, $tpath1, 80);
-        } else {
-            $tmp = $_FILES['video_thumbnail']['tmp_name'];
-            move_uploaded_file($tmp, $tpath1);
-        }
-    } else {
+//    if ($_POST['video_type'] == 'youtube') {
+//        $link = $_POST['video_url'];
+//        $video_id = explode("?v=", $link);
+//        $video_id = $video_id[1];
+//        $thumbnail = "http://img.youtube.com/vi/" . $video_id . "/maxresdefault.jpg";
+//        $ext = pathinfo($thumbnail, PATHINFO_EXTENSION);
+//
+//        $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
+//
+//        //Main Image
+//        $tpath1 = 'images/video/' . $video_image;
+//
+//        if ($ext != 'png') {
+//            $pic1 = compress_image($thumbnail, $tpath1, 80);
+//        } else {
+//            $tmp = $_FILES['video_thumbnail']['tmp_name'];
+//            move_uploaded_file($tmp, $tpath1);
+//        }
+//    } else {
         $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
 
         $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
@@ -49,13 +49,14 @@ if (isset($_POST['submit'])) {
             $tmp = $_FILES['video_thumbnail']['tmp_name'];
             move_uploaded_file($tmp, $tpath1);
         }
-    }
+   // }
     $data = array(
         'cat_id' => cleanInput($_POST['cat_id']),
         'video_title' => cleanInput($_POST['video_title']),
         'video_type' => cleanInput($_POST['video_type']),
         'video_upload' => cleanInput($_POST['video_file_name']),
         'video_url' => trim($_POST['video_url']),
+        'play_video' => trim($_POST['play_video']),
         'video_description' => addslashes($_POST['video_description']),
         'video_thumbnail' => $video_image
     );
@@ -130,6 +131,16 @@ if (isset($_POST['submit'])) {
                                     <input type="text" name="video_url" id="video_url" value="" class="form-control">
                                 </div>
                             </div>
+                            <div id="play_video" class="form-group" style="display:none;">
+                                <label class="col-md-3 control-label">Video Play :-</label>
+                                <div class="col-md-6">                       
+                                    <select name="play_video" id="play_video" style="width:280px; height:25px;" class="select2" required>
+                                        <option value="">--Select Video Play--</option>
+                                        <option value="false">Inside</option>
+                                        <option value="true">Outside</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div id="video_local_display" class="form-group" style="display:none;">
                                 <label class="col-md-3 control-label">Video Upload :-</label>
                                 <div class="col-md-6">
@@ -145,7 +156,7 @@ if (isset($_POST['submit'])) {
                                     <input type="button" id="btn" class="btn-success" value="Upload" />
                                 </div>
                             </div><br>
-                            <div id="thumbnail" class="form-group" style="display:none;">
+                            <div id="thumbnail" class="form-group">
                                 <label class="col-md-3 control-label">Thumbnail Image:-
                                     <p class="control-label-help">(Recommended resolution: 300*400,400*500 or Rectangle Image)</p>
                                 </label>
@@ -209,18 +220,21 @@ if (isset($_POST['submit'])) {
             {
                 //alert(type);
                 $("#video_url_display").show();
+                $("#play_video").show();
                 $("#video_local_display").hide();
-                $("#thumbnail").hide();
+               // $("#thumbnail").hide();
             } else if (type == "server_url")
             {
 
                 $("#video_url_display").show();
+                $("#play_video").hide();
                 $("#thumbnail").show();
                 $("#video_local_display").hide();
             } else
             {
 
                 $("#video_url_display").hide();
+                $("#play_video").hide();
                 $("#video_local_display").show();
                 $("#thumbnail").show();
 
@@ -243,7 +257,7 @@ if (isset($_POST['submit'])) {
             formData.append('video_local', $('#video_local')[0].files[0]);
             var id = document.getElementById('vid_id').value;
             var num = 1;
-            var add_id = +id+num;
+            var add_id = +id + num;
             formData.append('id', add_id);
             $('#btn').attr('disabled', 'disabled');
             $('.msg').text('Uploading in progress...');

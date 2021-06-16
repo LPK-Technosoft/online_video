@@ -40,8 +40,8 @@ $file_path = getBaseUrl() . 'api.php';
                 <br><b>Forgot Password</b>(Method: forgot_pass) (Parameter: user_email)
                 <br><b>Report</b>(Method: add_report) (Parameter: report_type, report_user_id, report_email, post_id, report_text)
                 <br><b>Contact Us</b>(Method: add_contact_us) (Parameter: title, description, image)
-                <br><b>Favorite Post</b>(Method: favorite_post) (Parameter: post_id, user_id, type[song/radio])
-                <br><b>Get Favorite Post</b>(Method: get_favorite_post) (Parameter: user_id, type[song/radio])
+                <br><b>Favorite Post</b>(Method: favorite_post) (Parameter: post_id, user_id, type[song/radio/video])
+                <br><b>Get Favorite Post</b>(Method: get_favorite_post) (Parameter: user_id, type[song/radio/video])
                 <br><b>App Details</b>(Method: get_app_details)
                 <br><b>Video list by Category</b>(Method: get_video_by_cat_id) (Parameter: cat_id)
                 <br><b>Single Video</b>(Method: get_single_video) (Parameter: video_id)
@@ -49,6 +49,7 @@ $file_path = getBaseUrl() . 'api.php';
                 <br><b>Search Video</b>(Method: get_search_video) (Parameter: search_text)
                 <br><b>Latest Video</b>(Method: get_latest_video)
                 <br><b>All Video</b>(Method: get_all_video)
+                <br><b>Featured Video</b>(Method: get_featured_video)
                 <br><b>Notification Details</b>(Method: fcm_token_list) (Parameter: fcm_id, fcm_token)
                 </code> 
                 </pre>

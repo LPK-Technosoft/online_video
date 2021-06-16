@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
             'message' => $content,
         );
     }
-    $notification_qry = Insert("tbl_notifications", $fields);
+   // $notification_qry = Insert("tbl_notifications", $fields);
 
     $fields = json_encode($fields);
     //print("\nJSON sent:\n");
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
         );
         $msg = '<script>swal("Success!","Apps Notification Results Success: ' . $jsonObject['success'] . ' Failure: ' . $jsonObject['failure'] . '", "success")</script>';
 
-        $qry = Insert("firebase_result", $fcmResult);
+        //$qry = Insert("firebase_result", $fcmResult);
         $_SESSION['class'] = "success";
         $_SESSION['msg'] = "16";
         //header("Location:send_notification.php");

@@ -20,8 +20,8 @@ if (isset($_GET['video_id'])) {
     $row = mysqli_fetch_assoc($result);
 //    print_r($row);
 }
-
 if (isset($_POST['submit'])) {
+
 //    if ($_POST['video_type'] == 'youtube') {
 //        $link = $_POST['video_url'];
 //        $video_id = explode("?v=", $link);
@@ -64,6 +64,7 @@ if (isset($_POST['submit'])) {
 //            'video_upload' => '',
 //            'video_url' => trim($_POST['video_url']),
             'video_description' => addslashes($_POST['video_description']),
+            'play_video' => addslashes($_POST['play_video']),
 //            'video_thumbnail' => $video_image
         );
     } else {
@@ -111,7 +112,8 @@ if (isset($_POST['submit'])) {
             <div class="clearfix"></div>
             <div class="card-body mrg_bottom"> 
                 <form action="" name="edit_form" method="post" class="form form-horizontal" enctype="multipart/form-data">
-                    <input  type="hidden" name="radio_id" id="vid_id" value="<?php echo $_GET['video_id']; ?>" />
+                    <input  type="hidden" name="video_id" id="vid_id" value="<?php echo $_GET['video_id']; ?>" />
+                    <input  type="hidden" name="video_type" id="video_type" value="<?php echo $row['video_type']; ?>" />
                     <div class="section">
                         <div class="section-body">
                             <div class="form-group">
@@ -170,17 +172,44 @@ if (isset($_POST['submit'])) {
                                         <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" disabled="">
                                     </div>
                                 </div>
-                                <?php
-                            }else{
-                            ?>
-<!--                            <div class="form-group" id="video_url_display1" style="display:none;">
-                                <label class="col-md-3 control-label">Video URL :-</label>
-                                <div class="col-md-6">
-                                    <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>
-                                </div>
-                            </div>-->
+                                <div id="play_video" class="form-group">
+                                    <label class="col-md-3 control-label">Video Play :-</label>
+                                    <div class="col-md-6">                       
+                                        <select name="play_video" id="play_video" style="width:280px; height:25px;" class="select2" required>
+                                            <option value="">--Select Video Play--</option>
+                                            <?php
+                                            if ($row['play_video'] == 'false') {
+                                                ?>
+                                                <option value="false" selected="">Inside</option>
+                                                <option value="true">Outside</option>
+                                                <?php
+                                            } else if ($row['play_video'] == 'true') {
+                                                ?>
+                                                <option value="false">Inside</option>
+                                                <option value="true" selected="">Outside</option>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <option value="false">Inside</option>
+                                                <option value="true">Outside</option>
+                                                <?php
+                                            }
+                                            ?>
 
-                            <?php
+                                        </select>
+                                    </div>
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <!--                            <div class="form-group" id="video_url_display1" style="display:none;">
+                                                                <label class="col-md-3 control-label">Video URL :-</label>
+                                                                <div class="col-md-6">
+                                                                    <input type="text" name="video_url" id="video_url" value="<?php echo $row['video_url']; ?>" class="form-control" required>
+                                                                </div>
+                                                            </div>-->
+
+                                <?php
                             }
                             if ($row['video_type'] == 'local') {
                                 ?>
@@ -229,14 +258,14 @@ if (isset($_POST['submit'])) {
                                         <input type="button" id="btn" class="btn-success" value="Upload" />
                                     </div>
                                 </div><br>
-                                <div id="thumbnail" class="form-group" style="display:none;">
+                                <div id="thumbnail" class="form-group">
                                     <label class="col-md-3 control-label">Thumbnail Image:-
                                         <p class="control-label-help">(Recommended resolution: 300*400,400*500 or Rectangle Image)</p>
                                     </label>
                                     <div class="col-md-6">
                                         <div class="fileupload_block">
-                                            <input type="file" name="video_thumbnail" value="" id="fileupload">
-                                            <div class="fileupload_img"><img type="image" src="" style="width: 120px;height: 120px" alt="Radio image" /></div>
+                                            <input type="file" name="video_thumbnail" value="" id="fileupload" disabled="">
+                                            <div class="fileupload_img"><img type="image" src="<?= ($row['video_thumbnail'] != '') ? 'images/video/' . $row['video_thumbnail'] : 'assets/images/square.jpg' ?>" style="width: 120px;height: 120px" alt="Radio image" /></div>
                                         </div>
                                     </div>
                                 </div>
