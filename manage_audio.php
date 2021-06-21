@@ -34,11 +34,10 @@ if (isset($_GET['status'])) {
 
     $query = "SELECT COUNT(*) as num FROM $tableName WHERE $status";
 
-    $video_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
-                  INNER JOIN tbl_audio ON tbl_audio.`cat_id`= tbl_category.`cid`
+    $audio_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
+                  INNER JOIN tbl_category ON tbl_audio.`cat_id`= tbl_category.`cid`
                   WHERE $status 
                   ORDER BY tbl_audio.`id` DESC LIMIT $start, $limit";
-
     $targetpage = "manage_audio.php?status=" . $_GET['status'];
 
     if (isset($_GET['category'])) {
@@ -47,7 +46,7 @@ if (isset($_GET['status'])) {
 
         $query = "SELECT COUNT(*) as num FROM $tableName WHERE $status AND `cat_id`='$cat_id'";
 
-        $video_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
+        $audio_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
                   LEFT JOIN tbl_category ON tbl_audio.`cat_id`= tbl_category.`cid`
                   WHERE $status AND tbl_audio.`cat_id`='$cat_id'
                   ORDER BY tbl_audio.`id` DESC LIMIT $start, $limit";
@@ -62,7 +61,7 @@ if (isset($_GET['status'])) {
     $query = "SELECT COUNT(*) as num FROM $tableName WHERE `cat_id`='$cat_id'";
     $targetpage = "manage_audio.php?category=$cat_id";
 
-    $video_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
+    $audio_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
                   LEFT JOIN tbl_category ON tbl_audio.`cat_id`= tbl_category.`cid`
                   WHERE tbl_audio.`cat_id`='$cat_id' ORDER BY tbl_audio.`id` DESC LIMIT $start, $limit";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
@@ -81,7 +80,7 @@ if (isset($_GET['status'])) {
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
     $total_pages = $total_pages['num'];
 
-    $video_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
+    $audio_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
                   LEFT JOIN tbl_category ON tbl_audio.`cat_id`= tbl_category.`cid`
                   WHERE (`audio_title` LIKE '%$keyword%' OR `audio_description` LIKE '%$keyword%') 
                   ORDER BY tbl_audio.`id` DESC LIMIT $start, $limit";
@@ -94,13 +93,13 @@ if (isset($_GET['status'])) {
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
     $total_pages = $total_pages['num'];
 
-    $video_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
+    $audio_qry = "SELECT tbl_audio.status as audio_status,tbl_audio.*,tbl_category.* FROM tbl_audio
                   LEFT JOIN tbl_category ON tbl_audio.`cat_id`= tbl_category.`cid` 
                   ORDER BY tbl_audio.`id` DESC LIMIT $start, $limit";
     // echo $video_qry;
 }
 
-$result = mysqli_query($mysqli, $video_qry);
+$result = mysqli_query($mysqli, $audio_qry);
 ?>
 
 <div class="row">
@@ -222,7 +221,7 @@ $result = mysqli_query($mysqli, $video_qry);
                                         <ul>
                                             <li><a href="javascript:void(0)" data-toggle="tooltip" data-tooltip="<?php echo $row['views']; ?> Views"><i class="fa fa-eye"></i></a></li>                      
 
-                                            <li><a href="edit_audio.php?video_id=<?php echo $row['id']; ?>&redirect=<?= $redirectUrl ?>" data-toggle="tooltip" data-tooltip="Edit"><i class="fa fa-edit"></i></a></li>
+                                            <li><a href="edit_audio.php?audio_id=<?php echo $row['id']; ?>&redirect=<?= $redirectUrl ?>" data-toggle="tooltip" data-tooltip="Edit"><i class="fa fa-edit"></i></a></li>
                                             <li><a href="javascript:void(0)" class="btn_delete_a" data-id="<?php echo $row['id']; ?>"  data-toggle="tooltip" data-tooltip="Delete"><i class="fa fa-trash"></i></a></li>
 
                                             <?php

@@ -176,7 +176,23 @@ switch ($_POST['action']) {
 
                 $deleteSql = "DELETE FROM tbl_video WHERE `id` IN ($ids)";
                 mysqli_query($mysqli, $deleteSql);
-            } else if ($table == 'tbl_mp3') {
+            }
+            else if ($table == 'tbl_audio') {
+
+                $sql = "SELECT * FROM tbl_audio WHERE `id` IN ($ids)";
+                $res = mysqli_query($mysqli, $sql);
+                while ($row = mysqli_fetch_assoc($res)) {
+                    if ($row['audio_thumbnail'] != "") {
+                        unlink('images/audio/' . $row['audio_thumbnail']);
+                    }
+                    if ($row['audio_upload'] != "") {
+                        unlink('uploads/audio/' . $row['audio_upload']);
+                    }
+                }
+
+                $deleteSql = "DELETE FROM tbl_audio WHERE `id` IN ($ids)";
+                mysqli_query($mysqli, $deleteSql);
+            }else if ($table == 'tbl_mp3') {
 
                 $sql = "SELECT * FROM tbl_mp3 WHERE `id` IN ($ids)";
                 $res = mysqli_query($mysqli, $sql);

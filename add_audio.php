@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         $tmp = $_FILES['audio_thumbnail']['tmp_name'];
         move_uploaded_file($tmp, $tpath1);
     }
-
+    $file = cleanInput($_POST['audio_file_name']);
     $data = array(
         'cat_id' => cleanInput($_POST['cat_id']),
         'audio_title' => cleanInput($_POST['audio_title']),
@@ -193,7 +193,7 @@ if (isset($_POST['submit'])) {
             var formData = new FormData();
             formData.append('audio_local', $('#audio_local')[0].files[0]);
             var id = document.getElementById('audio_id').value;
-           // alert(id);
+            // alert(id);
             var num = 1;
             var add_id = +id + num;
             formData.append('id', add_id);

@@ -139,7 +139,7 @@ $mysqli->set_charset("utf8mb4");
                         </li>
                         <li <?php if ($currentFile == "manage_audio.php" or $currentFile == "add_audio.php" or $currentFile == "edit_audio.php") { ?>class="active"<?php } ?>> 
                             <a href="manage_audio.php">
-                                <div class="icon"> <i class="fa fa-film" aria-hidden="true"></i> </div>
+                                <div class="icon"> <i class="fa fa-file-audio-o" aria-hidden="true"></i> </div>
                                 <div class="title">Audio</div>
                             </a> 
                         </li>

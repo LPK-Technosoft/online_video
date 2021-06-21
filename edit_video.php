@@ -6,10 +6,6 @@ require("language/language.php");
 
 require_once("thumbnail_images.class.php");
 
-//Get City
-$cat_qry = "SELECT * FROM tbl_city ORDER BY city_name";
-$cat_result = mysqli_query($mysqli, $cat_qry);
-
 $category_qry = "SELECT * FROM tbl_category ORDER BY category_name";
 $category_result = mysqli_query($mysqli, $category_qry);
 

@@ -20,6 +20,7 @@ $file_path = getBaseUrl() . 'api.php';
 
                 <br><b>Home</b>(Method: get_home_radio)
                 <br><b>Home Video</b>(Method: get_home_video)
+                <br><b>Home Audio</b>(Method: get_home_audio)
                 <br><b>Latest Radio</b>(Method: get_latest_radio)
                 <br><b>Featured Radio</b>(Method: get_featured_radio)
                 <br><b>Language List</b>(Method: lang_list)
@@ -45,11 +46,18 @@ $file_path = getBaseUrl() . 'api.php';
                 <br><b>App Details</b>(Method: get_app_details)
                 <br><b>Video list by Category</b>(Method: get_video_by_cat_id) (Parameter: cat_id)
                 <br><b>Single Video</b>(Method: get_single_video) (Parameter: video_id)
-				        <br><b>Most View Video List</b>(Method: get_most_video_view)
+		<br><b>Most View Video List</b>(Method: get_most_video_view)
                 <br><b>Search Video</b>(Method: get_search_video) (Parameter: search_text)
                 <br><b>Latest Video</b>(Method: get_latest_video)
                 <br><b>All Video</b>(Method: get_all_video)
                 <br><b>Featured Video</b>(Method: get_featured_video)
+                <br><b>Audio list by Category</b>(Method: get_audio_by_cat_id) (Parameter: cat_id)
+                <br><b>Single Audio</b>(Method: get_single_audio) (Parameter: audio_id)
+		<br><b>Most View Audio List</b>(Method: get_most_audio_view)
+                <br><b>Search Audio</b>(Method: get_search_audio) (Parameter: search_text)
+                <br><b>Latest Audio</b>(Method: get_latest_audio)
+                <br><b>All Audio</b>(Method: get_all_audio)
+                <br><b>Featured Audio</b>(Method: get_featured_audio)
                 <br><b>Notification Details</b>(Method: fcm_token_list) (Parameter: fcm_id, fcm_token)
                 </code> 
                 </pre>
