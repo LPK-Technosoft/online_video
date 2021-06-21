@@ -1,5 +1,5 @@
 <?php
-$page_title = "Add Video";
+$page_title = "Add Audio";
 include("includes/header.php");
 
 require("includes/function.php");
@@ -10,47 +10,39 @@ require_once("thumbnail_images.class.php");
 $category_qry = "SELECT * FROM tbl_category ORDER BY category_name";
 $category_result = mysqli_query($mysqli, $category_qry);
 
-$qry = "SELECT id FROM tbl_video ORDER BY id DESC LIMIT 1";
+$qry = "SELECT id FROM tbl_audio ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($mysqli, $qry);
 $row = mysqli_fetch_row($result);
 $id = $row[0];
 if (isset($_POST['submit'])) {
 
-    $ext = pathinfo($_FILES['video_thumbnail']['name'], PATHINFO_EXTENSION);
+    $ext = pathinfo($_FILES['audio_thumbnail']['name'], PATHINFO_EXTENSION);
 
-    $video_image = rand(0, 99999) . '_' . date('dmYhis') . "_video." . $ext;
+    $audio_image = rand(0, 99999) . '_' . date('dmYhis') . "_audio." . $ext;
 
     //Main Image
-    $tpath1 = 'images/video/' . $video_image;
+    $tpath1 = 'images/audio/' . $audio_image;
     // echo $tpath1;
     if ($ext != 'png') {
-        $pic1 = compress_image($_FILES["video_thumbnail"]["tmp_name"], $tpath1, 80);
+        $pic1 = compress_image($_FILES["audio_thumbnail"]["tmp_name"], $tpath1, 80);
     } else {
-        $tmp = $_FILES['video_thumbnail']['tmp_name'];
+        $tmp = $_FILES['audio_thumbnail']['tmp_name'];
         move_uploaded_file($tmp, $tpath1);
     }
-    //echo $_POST['play_video'];
-    if ($_POST['video_type'] == 'local') {
-       $play_video = "false";
-    }
-    //echo $_POST['play_video'];
 
     $data = array(
         'cat_id' => cleanInput($_POST['cat_id']),
-        'video_title' => cleanInput($_POST['video_title']),
-        'video_type' => cleanInput($_POST['video_type']),
-        'video_upload' => cleanInput($_POST['video_file_name']),
-        'video_url' => trim($_POST['video_url']),
-        'play_video' => $play_video,
-        'video_description' => addslashes($_POST['video_description']),
-        'video_thumbnail' => $video_image
+        'audio_title' => cleanInput($_POST['audio_title']),
+        'audio_upload' => cleanInput($_POST['audio_file_name']),
+        'audio_description' => addslashes($_POST['audio_description']),
+        'audio_thumbnail' => $audio_image
     );
-   // print_r($data);
-    $qry = Insert('tbl_video', $data);
+    // print_r($data);
+    $qry = Insert('tbl_audio', $data);
     $_SESSION['class'] = "success";
     $_SESSION['msg'] = "10";
 
-    header("Location:manage_video.php");
+    header("Location:manage_audio.php");
     exit;
 }
 ?>
@@ -61,7 +53,7 @@ if (isset($_POST['submit'])) {
         if (isset($_GET['redirect'])) {
             echo '<a href="' . $_GET['redirect'] . '" class="btn_back"><h4 class="pull-left" style="font-size: 20px;color: #e91e63"><i class="fa fa-arrow-left"></i> Back</h4></a>';
         } else {
-            echo '<a href="manage_video.php" class="btn_back"><h4 class="pull-left" style="font-size: 20px;color: #e91e63"><i class="fa fa-arrow-left"></i> Back</h4></a>';
+            echo '<a href="manage_audio.php" class="btn_back"><h4 class="pull-left" style="font-size: 20px;color: #e91e63"><i class="fa fa-arrow-left"></i> Back</h4></a>';
         }
         ?>
         <div class="card">
@@ -73,7 +65,7 @@ if (isset($_POST['submit'])) {
             <div class="clearfix"></div>
             <div class="card-body mrg_bottom"> 
                 <form action="" method="post" class="form form-horizontal" enctype="multipart/form-data">
-                    <input type="hidden" name="id" id="vid_id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="id" id="audio_id" value="<?php echo $id; ?>">
                     <div class="section">
                         <div class="section-body">
                             <div class="form-group">
@@ -92,43 +84,17 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Video Title :-</label>
+                                <label class="col-md-3 control-label">Audio Title :-</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="video_title" id="video_title" value="" class="form-control" required>
+                                    <input type="text" name="audio_title" id="audio_title" value="" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Video Type :-</label>
-                                <div class="col-md-6">                       
-                                    <select name="video_type" id="video_type" style="width:280px; height:25px;" class="select2" required>
-                                        <option value="">--Select Type--</option>
-                                        <option value="youtube">Youtube</option>
-                                        <option value="local">From Local</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="video_url_display" class="form-group" style="display:none;">
-                                <label class="col-md-3 control-label">Video URL :-</label>
-                                <div class="col-md-6">
-                                    <input type="text" name="video_url" id="video_url" value="" class="form-control">
-                                </div>
-                            </div>
-                            <div id="play_video" class="form-group" style="display:none;">
-                                <label class="col-md-3 control-label">Video Play :-</label>
-                                <div class="col-md-6">                       
-                                    <select name="play_video" id="play_video" style="width:280px; height:25px;" class="select2">
-                                        <option value="">--Select Video Play--</option>
-                                        <option value="false">Inside</option>
-                                        <option value="true">Outside</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="video_local_display" class="form-group" style="display:none;">
-                                <label class="col-md-3 control-label">Video Upload :-</label>
+                            <div id="video_local_display" class="form-group">
+                                <label class="col-md-3 control-label">Audio Upload :-</label>
                                 <div class="col-md-6">
 
-                                    <input type="hidden" name="video_file_name" id="video_file_name" value="" class="form-control">
-                                    <input type="file" name="video_local" id="video_local" value="" class="form-control">
+                                    <input type="hidden" name="audio_file_name" id="audio_file_name" value="" class="form-control">
+                                    <input type="file" name="audio_local" id="audio_local" value="" class="form-control">
 
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
@@ -144,16 +110,16 @@ if (isset($_POST['submit'])) {
                                 </label>
                                 <div class="col-md-6">
                                     <div class="fileupload_block">
-                                        <input type="file" name="video_thumbnail" value="" id="fileupload">
+                                        <input type="file" name="audio_thumbnail" value="" id="fileupload">
                                         <div class="fileupload_img"><img type="image" src="assets/images/add-image.png" alt="category image" /></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Video Description :-</label>
+                                <label class="col-md-3 control-label">Audio Description :-</label>
                                 <div class="col-md-6">
-                                    <textarea name="video_description" id="video_description" class="form-control"></textarea>
-                                    <script>CKEDITOR.replace('video_description');</script>
+                                    <textarea name="audio_description" id="video_description" class="form-control"></textarea>
+                                    <script>CKEDITOR.replace('audio_description');</script>
                                 </div>
                             </div>
                             <br/>
@@ -173,7 +139,7 @@ if (isset($_POST['submit'])) {
 <?php include("includes/footer.php"); ?>
 
 <script type="text/javascript">
-    $("input[name='video_thumbnail']").change(function () {
+    $("input[name='audio_thumbnail']").change(function () {
         var file = $(this);
 
         if (file[0].files.length != 0) {
@@ -193,47 +159,48 @@ if (isset($_POST['submit'])) {
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function (e) {
-        $("#video_type").change(function () {
-
-            var type = $("#video_type").val();
-
-            if (type == "youtube")
-            {
-                //alert(type);
-                $("#video_url_display").show();
-                $("#play_video").show();
-                $("#video_local_display").hide();
-            } else
-            {
-                $("#video_url_display").hide();
-                $("#play_video").hide();
-                $("#video_local_display").show();
-            }
-
-        });
-    });
+//    $(document).ready(function (e) {
+//        $("#video_type").change(function () {
+//
+//            var type = $("#video_type").val();
+//
+//            if (type == "youtube")
+//            {
+//                //alert(type);
+//                $("#video_url_display").show();
+//                $("#play_video").show();
+//                $("#video_local_display").hide();
+//            } else
+//            {
+//                $("#video_url_display").hide();
+//                $("#play_video").hide();
+//                $("#video_local_display").show();
+//            }
+//
+//        });
+//    });
 </script>
 <script>
     $(function () {
         $('#btn').click(function () {
             $('.myprogress').css('width', '0');
             $('.msg').text('');
-            var video_local = $('#video_local').val();
+            var video_local = $('#audio_local').val();
             if (video_local == '') {
                 alert('Please enter file name and select file');
                 return;
             }
             var formData = new FormData();
-            formData.append('video_local', $('#video_local')[0].files[0]);
-            var id = document.getElementById('vid_id').value;
+            formData.append('audio_local', $('#audio_local')[0].files[0]);
+            var id = document.getElementById('audio_id').value;
+           // alert(id);
             var num = 1;
             var add_id = +id + num;
             formData.append('id', add_id);
             $('#btn').attr('disabled', 'disabled');
             $('.msg').text('Uploading in progress...');
             $.ajax({
-                url: 'uploadscript.php',
+                url: 'upload_audio.php',
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -253,7 +220,7 @@ if (isset($_POST['submit'])) {
                 },
                 success: function (data) {
                     alert(data);
-                    $('#video_file_name').val(data);
+                    $('#audio_file_name').val(data);
                     $('.msg').text("File uploaded successfully!!");
                     $('#btn').removeAttr('disabled');
                 }

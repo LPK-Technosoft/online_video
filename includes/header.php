@@ -137,7 +137,12 @@ $mysqli->set_charset("utf8mb4");
                                 <div class="title">Video</div>
                             </a> 
                         </li>
-                        
+                        <li <?php if ($currentFile == "manage_audio.php" or $currentFile == "add_audio.php" or $currentFile == "edit_audio.php") { ?>class="active"<?php } ?>> 
+                            <a href="manage_audio.php">
+                                <div class="icon"> <i class="fa fa-film" aria-hidden="true"></i> </div>
+                                <div class="title">Audio</div>
+                            </a> 
+                        </li>
                         <li <?php if ($currentFile == "manage_mp3.php" or $currentFile == "add_mp3.php" or $currentFile == "edit_mp3.php") { ?>class="active"<?php } ?>> 
                             <a href="manage_mp3.php">
                                 <div class="icon"> <i class="fa fa-music" aria-hidden="true"></i> </div>
